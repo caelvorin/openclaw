@@ -328,7 +328,11 @@ describe("runDaemonRestart health checks", () => {
       );
       expect(findVerifiedGatewayListenerPidsOnPortSync).toHaveBeenCalledWith(18790);
     } finally {
-      process.env.OPENCLAW_PROFILE = originalEnv;
+      if (originalEnv === undefined) {
+        delete process.env.OPENCLAW_PROFILE;
+      } else {
+        process.env.OPENCLAW_PROFILE = originalEnv;
+      }
     }
   });
 
@@ -351,7 +355,11 @@ describe("runDaemonRestart health checks", () => {
       expect(service.readCommand).toHaveBeenCalledWith(process.env);
       expect(findVerifiedGatewayListenerPidsOnPortSync).toHaveBeenCalledWith(18789);
     } finally {
-      process.env.OPENCLAW_PROFILE = originalEnv;
+      if (originalEnv === undefined) {
+        delete process.env.OPENCLAW_PROFILE;
+      } else {
+        process.env.OPENCLAW_PROFILE = originalEnv;
+      }
     }
   });
 });
